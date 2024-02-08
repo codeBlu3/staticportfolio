@@ -5,19 +5,20 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Container,
   Typography,
   Button,
-	IconButton,
+  IconButton,
   AppBar,
   Toolbar,
   Link,
   CssBaseline,
   GlobalStyles,
   Divider,
-	Menu, MenuItem
+  Menu,
+  MenuItem,
 } from "@mui/material";
 
 import {
@@ -27,9 +28,7 @@ import {
   useTheme,
 } from "@mui/material/styles";
 
-
-
-import {Menu as MenuIcon} from '@mui/icons-material';
+import { Menu as MenuIcon } from "@mui/icons-material";
 
 import { useBreakpoint } from "./useBreakpoint";
 
@@ -39,17 +38,6 @@ defaultTheme = responsiveFontSizes(defaultTheme);
 function App() {
   const breakpoint = useBreakpoint();
   console.log(breakpoint);
-
-
-	 const [anchorEl, setAnchorEl] = useState(null);
-
-	  const handleMenuOpen = (event) => {
-		      setAnchorEl(event.currentTarget);
-		    };
-
-	  const handleMenuClose = () => {
-		      setAnchorEl(null);
-		    };
 
   return (
     <>
@@ -72,38 +60,7 @@ function App() {
             >
               CodeBlu3
             </Typography>
-	  {/*{breakpoint === "xs" ? <MenuBarXs/> : <NavBarLg />*/}
-
-
-
-      <Toolbar>
-	          <IconButton
-	            edge="start"
-	            color="inherit"
-	            aria-label="menu"
-	            aria-controls="menu"
-	            aria-haspopup="true"
-	            onClick={handleMenuOpen}
-	          >
-	            <MenuIcon />
-	          </IconButton>
-	          <Menu
-	            id="menu"
-	            anchorEl={anchorEl}
-	            open={Boolean(anchorEl)}
-	            onClose={handleMenuClose}
-	          >
-	            <MenuItem onClick={handleMenuClose}>
-	              <Link href="/">Home</Link>
-	            </MenuItem>
-	            <MenuItem onClick={handleMenuClose}>
-	              <Link href="/about">About</Link>
-	            </MenuItem>
-	            <MenuItem onClick={handleMenuClose}>
-	              <Link href="/contact">Contact</Link>
-	            </MenuItem>
-	          </Menu>
-	        </Toolbar>
+            {breakpoint === "xs" ? <MenuBarXs/> : <NavBarLg />}
 
           </Toolbar>
         </AppBar>
@@ -120,23 +77,57 @@ function App() {
 }
 
 const MenuBarXs = () => {
+
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-	  <>
-	  <Menu/>
-<MenuIcon/> 
-	  </>
+    <>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                aria-controls="menu"
+                aria-haspopup="true"
+                onClick={handleMenuOpen}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleMenuClose}
+              >
+               <MenuItem onClick={handleMenuClose}>
+                  <Link href="#about">About</Link>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                  <Link href="#projects">Projects</Link>
+                </MenuItem>
+ 
+                <MenuItem onClick={handleMenuClose}>
+                  <Link href="#experiences">Experiences</Link>
+                </MenuItem>
+              </Menu>
+
+    </>
   );
 };
-
-
-
 
 const NavBarLg = () => {
   return (
     <nav>
       <Link
         variant="button"
-        color="text.primary"
+        color="inherit"
         href="#about"
         underline="hover"
         sx={{ my: 1, mx: 1.5 }}
@@ -145,7 +136,7 @@ const NavBarLg = () => {
       </Link>
       <Link
         variant="button"
-        color="text.primary"
+        color="inherit"
         href="#projects"
         underline="hover"
         sx={{ my: 1, mx: 1.5 }}
@@ -154,12 +145,12 @@ const NavBarLg = () => {
       </Link>
       <Link
         variant="button"
-        color="text.primary"
+        color="inherit"
         href="#experiences"
         underline="hover"
         sx={{ my: 1, mx: 1.5 }}
       >
-        Experience
+        Experiences
       </Link>
     </nav>
   );
@@ -169,7 +160,7 @@ const SectionHeader = ({ sectionStr }) => {
   return (
     <Typography
       variant="h3"
-      sx={{ color: (theme) => theme.palette.primary.main }}
+      sx={{ color: (theme) => theme.palette.primary.main, mx:1.5 }}
     >
       {sectionStr}
     </Typography>
@@ -178,8 +169,8 @@ const SectionHeader = ({ sectionStr }) => {
 
 const AboutSection = () => (
   <section id="about">
-    <SectionHeader sectionStr="About" />
     <Divider />
+    <SectionHeader sectionStr="About" />
     <Typography>Hi Im Eph. </Typography>
     <Typography>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -255,7 +246,7 @@ const ProjectsSection = () => (
 const ExperienceSection = () => {
   return (
     <section id="experiences">
-    <Divider />
+      <Divider />
       <SectionHeader sectionStr="Experiences" />
       <Typography>
         Praesent semper feugiat nibh sed pulvinar proin gravida hendrerit
